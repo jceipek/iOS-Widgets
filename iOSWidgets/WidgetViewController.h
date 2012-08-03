@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MessageBubble.h"
+#import "PatternedPill.h"
 
 @interface WidgetViewController : UIViewController
 

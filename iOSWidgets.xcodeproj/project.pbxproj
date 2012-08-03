@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		273F885315C8A9CE00077CE4 /* MessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 273F885215C8A9CE00077CE4 /* MessageBubble.m */; };
+		2785D67415CB4ABD002D813B /* PatternedPill.m in Sources */ = {isa = PBXBuildFile; fileRef = 2785D67315CB4ABD002D813B /* PatternedPill.m */; };
 		2796EEBC15C8AE1B001E65B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2796EEBB15C8AE1B001E65B3 /* QuartzCore.framework */; };
 		2796EEC015C8AF4B001E65B3 /* WidgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2796EEBF15C8AF4B001E65B3 /* WidgetViewController.m */; };
 		27C1D0DD15C768D3008CE416 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C1D0DC15C768D3008CE416 /* UIKit.framework */; };
@@ -41,6 +42,8 @@
 /* Begin PBXFileReference section */
 		273F885115C8A9CE00077CE4 /* MessageBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageBubble.h; path = iOSWidgets/MessageBubble.h; sourceTree = "<group>"; };
 		273F885215C8A9CE00077CE4 /* MessageBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageBubble.m; path = iOSWidgets/MessageBubble.m; sourceTree = "<group>"; };
+		2785D67215CB4ABD002D813B /* PatternedPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatternedPill.h; path = iOSWidgets/PatternedPill.h; sourceTree = "<group>"; };
+		2785D67315CB4ABD002D813B /* PatternedPill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PatternedPill.m; path = iOSWidgets/PatternedPill.m; sourceTree = "<group>"; };
 		2796EEBB15C8AE1B001E65B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2796EEBE15C8AF4B001E65B3 /* WidgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WidgetViewController.h; sourceTree = "<group>"; };
 		2796EEBF15C8AF4B001E65B3 /* WidgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetViewController.m; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 				2796EEBB15C8AE1B001E65B3 /* QuartzCore.framework */,
 				273F885115C8A9CE00077CE4 /* MessageBubble.h */,
 				273F885215C8A9CE00077CE4 /* MessageBubble.m */,
+				2785D67215CB4ABD002D813B /* PatternedPill.h */,
+				2785D67315CB4ABD002D813B /* PatternedPill.m */,
 				27C1D11715C78D01008CE416 /* CoreText.framework */,
 				27C1D0E215C768D3008CE416 /* iOSWidgets */,
 				27C1D10315C768D3008CE416 /* iOSWidgetsTests */,
@@ -291,6 +296,7 @@
 				27C1D11615C76945008CE416 /* WidgetView.m in Sources */,
 				273F885315C8A9CE00077CE4 /* MessageBubble.m in Sources */,
 				2796EEC015C8AF4B001E65B3 /* WidgetViewController.m in Sources */,
+				2785D67415CB4ABD002D813B /* PatternedPill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
