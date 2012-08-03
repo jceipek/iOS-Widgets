@@ -7,11 +7,12 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import <QuartzCore/QuartzCore.h>
 
 @interface PatternedPill : CALayer
 
 - (id)initWithTop:(float)top left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight;
+
+
 
 @end
 

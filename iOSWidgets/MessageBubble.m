@@ -67,6 +67,8 @@
     CGContextSetTextDrawingMode(context, kCGTextFill);
     CGContextSetTextPosition(context, self.bounds.size.width*0.07, self.bounds.size.height*0.33);
     CGContextShowText(context, [text UTF8String], strlen([text UTF8String]));
+    
+    CGPathRelease(path);
 }
 
 @end

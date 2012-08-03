@@ -22,6 +22,9 @@
 - (void)drawInContext:(CGContextRef)context {
     [super drawInContext:context];
     
+    //CGColorRef whiteColor = [UIColor redColor].CGColor;
+    //CGContextSetFillColorWithColor(context, whiteColor);
+    
     if (!roundLeft && !roundRight) {
         CGContextFillRect(context, self.bounds);
     } else {
@@ -60,7 +63,36 @@
         CGContextFillPath(context);
     }
     
+    static const CGPatternCallbacks callbacks = { 0, &MyDrawColoredPattern, NULL };
     
+    CGContextSaveGState(context);
+    CGColorSpaceRef patternSpace = CGColorSpaceCreatePattern(NULL);
+    CGContextSetFillColorSpace(context, patternSpace);
+    CGColorSpaceRelease(patternSpace);
+    
+    CGPatternRef pattern = CGPatternCreate(NULL,
+                                           self.bounds,
+                                           CGAffineTransformIdentity,
+                                           24,
+                                           24,
+                                           kCGPatternTilingConstantSpacing,
+                                           true,
+                                           &callbacks);
+    CGFloat alpha = 1.0;
+    CGContextSetFillPattern(context, pattern, &alpha);
+    CGPatternRelease(pattern);
+    CGContextFillRect(context, self.bounds);
+    CGContextRestoreGState(context);
+    
+}
+
+void MyDrawColoredPattern (void *info, CGContextRef context) {
+    CGColorRef whiteColor = [UIColor whiteColor].CGColor;
+    CGContextSetStrokeColorWithColor(context, whiteColor);
+    
+    CGContextMoveToPoint(context, 0, 3);
+    CGContextAddLineToPoint(context, 5, 3);
+    CGContextStrokePath(context);
 }
 
 
