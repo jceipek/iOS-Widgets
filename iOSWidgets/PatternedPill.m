@@ -10,8 +10,9 @@
 
 @implementation PatternedPill
 
-- (id)initWithTop:(float)top left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight {
+- (id)initWithTop:(float)top left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight backgroundColor:(CGColorRef)backgroundColor {
     self = [super init];
+    bgColor = backgroundColor;
     roundLeft = doRoundLeft;
     roundRight = doRoundRight;
     [self setBounds:CGRectMake(0, 0, width, height)];
@@ -22,8 +23,7 @@
 - (void)drawInContext:(CGContextRef)context {
     [super drawInContext:context];
     
-    //CGColorRef whiteColor = [UIColor redColor].CGColor;
-    //CGContextSetFillColorWithColor(context, whiteColor);
+    CGContextSetFillColorWithColor(context, bgColor);
     
     if (!roundLeft && !roundRight) {
         CGContextFillRect(context, self.bounds);
@@ -63,18 +63,20 @@
         CGContextFillPath(context);
     }
     
-    static const CGPatternCallbacks callbacks = { 0, &MyDrawColoredPattern, NULL };
+    //Adapted from Core Graphics 101: Patterns (broken links at the moment)
+    static const CGPatternCallbacks callbacks = { 0, &StripedPattern, NULL };
     
-    CGContextSaveGState(context);
     CGColorSpaceRef patternSpace = CGColorSpaceCreatePattern(NULL);
     CGContextSetFillColorSpace(context, patternSpace);
     CGColorSpaceRelease(patternSpace);
     
-    CGPatternRef pattern = CGPatternCreate(NULL,
+    CGSize size = self.bounds.size;
+    
+    CGPatternRef pattern = CGPatternCreate(&size,
                                            self.bounds,
                                            CGAffineTransformIdentity,
-                                           24,
-                                           24,
+                                           15,
+                                           size.height,
                                            kCGPatternTilingConstantSpacing,
                                            true,
                                            &callbacks);
@@ -82,16 +84,20 @@
     CGContextSetFillPattern(context, pattern, &alpha);
     CGPatternRelease(pattern);
     CGContextFillRect(context, self.bounds);
-    CGContextRestoreGState(context);
     
 }
 
-void MyDrawColoredPattern (void *info, CGContextRef context) {
+void StripedPattern (void *info, CGContextRef context) {
+    
+    CGSize *size = (CGSize *)info;
+    
     CGColorRef whiteColor = [UIColor whiteColor].CGColor;
     CGContextSetStrokeColorWithColor(context, whiteColor);
     
-    CGContextMoveToPoint(context, 0, 3);
-    CGContextAddLineToPoint(context, 5, 3);
+    CGContextSetLineWidth(context, size->height/7.0f);
+    
+    CGContextMoveToPoint(context, 0, size->height/2.0f);
+    CGContextAddLineToPoint(context, 7, size->height/2.0f);
     CGContextStrokePath(context);
 }
 

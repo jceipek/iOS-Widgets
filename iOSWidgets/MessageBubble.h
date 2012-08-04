@@ -11,10 +11,11 @@
 
 @interface MessageBubble : CALayer
 
-- (id)initWithText:(NSString*)theText originX:(float)x y:(float)y fontSize:(float)theFontSize radius:(float)theRadius;
+- (id)initWithText:(NSString*)theText originX:(float)x y:(float)y fontSize:(float)theFontSize radius:(float)theRadius backgroundColor:(CGColorRef)backgroundColor;
 
 @end
 
+CGColorRef bgColor;
 NSString *text;
 float fontSize;
 float radius;

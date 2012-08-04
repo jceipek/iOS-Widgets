@@ -10,11 +10,14 @@
 
 @interface PatternedPill : CALayer
 
-- (id)initWithTop:(float)top left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight;
+- (id)initWithTop:(float)top left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight backgroundColor:(CGColorRef)backgroundColor;
 
 
 
 @end
 
+CGColorRef bgColor;
 BOOL roundLeft;
 BOOL roundRight;
+
+

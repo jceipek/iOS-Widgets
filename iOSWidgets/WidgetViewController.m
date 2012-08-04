@@ -27,11 +27,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    MessageBubble *messageLayer = [[MessageBubble alloc] initWithText:@"12:50" originX:150.0 y:200.0 fontSize:20.0f radius:5.0f];
+    MessageBubble *messageLayer = [[MessageBubble alloc] initWithText:@"12:50" originX:150.0 y:200.0 fontSize:20.0f radius:5.0f backgroundColor:[UIColor redColor].CGColor];
     [[[self view] layer] addSublayer: messageLayer];
     [messageLayer setNeedsDisplay];
     
-    PatternedPill *pillLayer = [[PatternedPill alloc] initWithTop:100.0f left:100.0f width:100.0f height:30.0f roundLeft:TRUE right:TRUE];
+    PatternedPill *pillLayer = [[PatternedPill alloc] initWithTop:100.0f left:100.0f width:100.0f height:10.0f roundLeft:TRUE right:TRUE backgroundColor:[UIColor redColor].CGColor];
     [[[self view] layer] addSublayer: pillLayer];
     [pillLayer setNeedsDisplay];
 }

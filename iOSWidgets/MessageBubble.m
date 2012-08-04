@@ -10,8 +10,9 @@
 
 @implementation MessageBubble
 
-- (id)initWithText:(NSString*)theText originX:(float)x y:(float)y fontSize:(float)theFontSize radius:(float)theRadius {
+- (id)initWithText:(NSString*)theText originX:(float)x y:(float)y fontSize:(float)theFontSize radius:(float)theRadius backgroundColor:(CGColorRef)backgroundColor {
     self = [super init];
+    bgColor = backgroundColor;
     text = theText;
     fontSize = theFontSize;
     radius = theRadius;
@@ -32,7 +33,7 @@
     
     CGPoint origin = CGPointMake(self.bounds.size.width, self.bounds.size.height); // Where the flag is pointing
     
-    CGContextSetRGBFillColor(context, 95.0/255.0, 211.0/255.0, 95.0/255.0, 1); // BG Color
+    CGContextSetFillColorWithColor(context, bgColor);
     
     CGContextMoveToPoint(context, origin.x, origin.y); //FlagBottom
     CGContextAddLineToPoint(context, origin.x, origin.y-flagHeight-height+radius); //FlagTopRight
@@ -61,6 +62,7 @@
     CGContextScaleCTM(context, 1.0, -1.0);
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddRect(path, NULL, self.bounds);
+    CGPathRelease(path);
     
     // Now draw the text
     CGContextSelectFont(context, "TrebuchetMS-Italic", fontSize, kCGEncodingMacRoman);
@@ -68,7 +70,6 @@
     CGContextSetTextPosition(context, self.bounds.size.width*0.07, self.bounds.size.height*0.33);
     CGContextShowText(context, [text UTF8String], strlen([text UTF8String]));
     
-    CGPathRelease(path);
 }
 
 @end
