@@ -8,14 +8,17 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+typedef enum {
+    pStriped,
+    pLadder
+} PatternType;
+
 @interface PatternedPill : CALayer
 
-- (id)initWithTop:(float)top left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight backgroundColor:(CGColorRef)backgroundColor;
-
-
-
+- (id)initWithMiddle:(float)middle left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight backgroundColor:(CGColorRef)backgroundColor pattern:(PatternType)pType;
 @end
 
+PatternType patternType;
 CGColorRef bgColor;
 BOOL roundLeft;
 BOOL roundRight;

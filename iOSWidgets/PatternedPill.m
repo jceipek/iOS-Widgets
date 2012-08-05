@@ -10,13 +10,14 @@
 
 @implementation PatternedPill
 
-- (id)initWithTop:(float)top left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight backgroundColor:(CGColorRef)backgroundColor {
+- (id)initWithMiddle:(float)middle left:(float)left width:(float)width height:(float)height roundLeft:(BOOL)doRoundLeft right:(BOOL)doRoundRight backgroundColor:(CGColorRef)backgroundColor pattern:(PatternType)pType {
     self = [super init];
+    patternType = pType;
     bgColor = backgroundColor;
     roundLeft = doRoundLeft;
     roundRight = doRoundRight;
     [self setBounds:CGRectMake(0, 0, width, height)];
-    [self setPosition:CGPointMake(left, top)];
+    [self setPosition:CGPointMake(left, middle-height/2.0f)]; // Top Left
     return self;
 }
 
@@ -63,23 +64,38 @@
         CGContextFillPath(context);
     }
     
-    //Adapted from Core Graphics 101: Patterns (broken links at the moment)
-    static const CGPatternCallbacks callbacks = { 0, &StripedPattern, NULL };
-    
+    //Adapted from Core Graphics 101: Patterns (broken links at the moment)    
     CGColorSpaceRef patternSpace = CGColorSpaceCreatePattern(NULL);
     CGContextSetFillColorSpace(context, patternSpace);
     CGColorSpaceRelease(patternSpace);
     
     CGSize size = self.bounds.size;
+    CGPatternRef pattern;
     
-    CGPatternRef pattern = CGPatternCreate(&size,
-                                           self.bounds,
-                                           CGAffineTransformIdentity,
-                                           15,
-                                           size.height,
-                                           kCGPatternTilingConstantSpacing,
-                                           true,
-                                           &callbacks);
+    if (patternType == pLadder) {
+        static const CGPatternCallbacks callbacks = { 0, &LadderPattern, NULL };
+        
+        pattern = CGPatternCreate(&size,
+                                   self.bounds,
+                                   CGAffineTransformIdentity,
+                                   7,
+                                   size.height,
+                                   kCGPatternTilingConstantSpacing,
+                                   true,
+                                   &callbacks);
+    } else if (patternType == pStriped) {
+        static const CGPatternCallbacks callbacks = { 0, &StripedPattern, NULL };
+        
+        pattern = CGPatternCreate(&size,
+                                   self.bounds,
+                                   CGAffineTransformIdentity,
+                                   15,
+                                   size.height,
+                                   kCGPatternTilingConstantSpacing,
+                                   true,
+                                   &callbacks);
+    }
+
     CGFloat alpha = 1.0;
     CGContextSetFillPattern(context, pattern, &alpha);
     CGPatternRelease(pattern);
@@ -98,6 +114,23 @@ void StripedPattern (void *info, CGContextRef context) {
     
     CGContextMoveToPoint(context, 0, size->height/2.0f);
     CGContextAddLineToPoint(context, 7, size->height/2.0f);
+    CGContextStrokePath(context);
+}
+
+void LadderPattern (void *info, CGContextRef context) {
+    
+    CGSize *size = (CGSize *)info;
+    
+    CGColorRef whiteColor = [UIColor whiteColor].CGColor;
+    CGContextSetStrokeColorWithColor(context, whiteColor);
+    
+    CGContextSetLineWidth(context, size->height/7.0f);
+    
+    CGContextMoveToPoint(context, 0, size->height/4.0f);
+    CGContextAddLineToPoint(context, 7, size->height/4.0f);
+    
+    CGContextAddLineToPoint(context, 7, size->height/4.0f*3.0f);
+    CGContextAddLineToPoint(context, 0, size->height/4.0f*3.0f);
     CGContextStrokePath(context);
 }
 

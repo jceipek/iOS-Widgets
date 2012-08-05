@@ -31,7 +31,7 @@
     [[[self view] layer] addSublayer: messageLayer];
     [messageLayer setNeedsDisplay];
     
-    PatternedPill *pillLayer = [[PatternedPill alloc] initWithTop:100.0f left:100.0f width:100.0f height:10.0f roundLeft:TRUE right:TRUE backgroundColor:[UIColor redColor].CGColor];
+    PatternedPill *pillLayer = [[PatternedPill alloc] initWithMiddle:100.0f left:100.0f width:100.0f height:10.0f roundLeft:TRUE right:TRUE backgroundColor:[UIColor redColor].CGColor pattern:pLadder];
     [[[self view] layer] addSublayer: pillLayer];
     [pillLayer setNeedsDisplay];
 }
